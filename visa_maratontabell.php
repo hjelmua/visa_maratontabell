@@ -8,7 +8,7 @@
 */
 
 // Code : WP Shortcode to display IFK Uppsala Maratontabell on any page or post.
-function ifktabell_creation(){
+function ifktabell_creation($atts, $content=null){
 	/* klistra in koden nedan */
 	$servername = "database server";
 	$username = "my username";
@@ -230,6 +230,8 @@ function ifktabell_creation(){
 
 
 
+    // begin output buffering
+    ob_start();
 
 	$result = mysqli_query($conn, $sql);
 	$num_rows = mysqli_num_rows($result);
@@ -256,6 +258,8 @@ function ifktabell_creation(){
 	    echo "0 results";
 	}
 
+    // end output buffering, grab the buffer contents, and empty the buffer
+      return ob_get_clean();
 	// slut default svar
 
 
